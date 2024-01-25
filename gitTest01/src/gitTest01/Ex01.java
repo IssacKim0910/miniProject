@@ -14,6 +14,7 @@ public class Ex01 {
 				System.out.print("*");
 			}System.out.println();
 		}
+
 	}
 
 }
