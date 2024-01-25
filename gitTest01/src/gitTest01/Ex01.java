@@ -9,8 +9,6 @@ public class Ex01 {
 		
 		System.out.println("팀원2 세번째 커밋!");
 		
-		
-		
 		for(int i = 0; i < 25; i++) {
 			for (int j = 0; j < i; j++) {
 				System.out.print("*");
