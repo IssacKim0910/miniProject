@@ -1,5 +1,7 @@
 package gitTest01;
 
+import java.util.Random;
+
 public class Ex01 {
 
 	public static void main(String[] args) {
@@ -15,16 +17,27 @@ public class Ex01 {
 //			}System.out.println();
 //		}
 		
-		for(int j = 10; j >=0; j --) {
-			System.out.println();
-			for(int k = 0; k < j; k++) {
-				System.out.print("");
-			}
-			for(int i = 10; i >=j; i--) {
+//		for(int j = 10; j >=0; j --) {
+//			System.out.println();
+//			for(int k = 0; k < j; k++) {
+//				System.out.print("");
+//			}
+//			for(int i = 10; i >=j; i--) {
+//				System.out.print("*");
+//			}
+			
+//		}
+		
+		Random ran = new Random();
+		int num = ran.nextInt(30)+1;
+		
+		for(int i = 1; i <= num; i++) {
+			for(int j = 1; j <= i; j++) {
 				System.out.print("*");
 			}
-			
+			System.out.println();
 		}
+		
 	}
 
 }
