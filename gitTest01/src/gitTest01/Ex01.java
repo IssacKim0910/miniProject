@@ -1,6 +1,7 @@
 package gitTest01;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class Ex01 {
 
@@ -27,17 +28,24 @@ public class Ex01 {
 //			}
 			
 //		}
-		
-		Random ran = new Random();
-		int num = ran.nextInt(30)+1;
-		
-		for(int i = 1; i <= num; i++) {
-			for(int j = 1; j <= i; j++) {
+//		
+//		Random ran = new Random();
+//		int num = ran.nextInt(30)+1;
+//		
+//		for(int i = 1; i <= num; i++) {
+//			for(int j = 1; j <= i; j++) {
+//				System.out.print("*");
+//			}
+//			System.out.println();
+//		}
+		Scanner sc = new Scanner(System.in);
+		System.out.print("정수 입력 : ");
+		int num = sc.nextInt();
+		for(int i = num; i >= 1; i--) {
+			for (int j = 1; j <= i; j++) {
 				System.out.print("*");
-			}
-			System.out.println();
+			}System.out.println();
 		}
-		
 	}
 
 }
