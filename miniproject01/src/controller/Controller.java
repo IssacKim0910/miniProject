@@ -1,5 +1,17 @@
 package controller;
 
-public class Controller {
+import model.DAO;
+import model.DTO;
 
+public class Controller {
+	private DAO dao = new DAO();
+	
+	public int join(DTO dto) {
+		return dao.join(dto);
+		
+	}
+
+	public DTO login(String id, String pw) {
+		return dao.login(id, pw);
+	}
 }

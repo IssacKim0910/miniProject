@@ -1,6 +1,13 @@
 package main;
 
 import java.util.Scanner;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import controller.Controller;
+import java.sql.SQLException;
+import model.DTO;
+import model.DAO;
+
 
 public class Main {
 
@@ -26,7 +33,9 @@ public class Main {
 				+ "                  ###`  ``##         `###````````````````` `                         ``##`           `####` ` `  `#####``                   ##`             \r\n"
 				+ "                         `##        ` ####################                          ` `##`             ``########### `                     `##`             ");
 		
-		
+		Controller controller = new Controller();
+
+		DTO dto = null;
 	
 		while(true) {
 			System.out.print("[1]회원등록  [2]로그인  [3]랭킹  [4]종료 >> ");
@@ -49,7 +58,11 @@ public class Main {
 				String nick = sc.next();
 				String name = nick + "님 환영합니다.";
 				for(int i =0; i < name.length(); i++) {
-					
+					DTO info = controller.login(id, pw);
+
+					if (info != null) {
+						System.out.println(info.getNick() + "님 환영합니다.");
+					}	
 				System.out.print(name.charAt(i));
 				try {
 					Thread.sleep(50);
