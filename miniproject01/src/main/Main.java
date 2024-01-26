@@ -53,8 +53,10 @@ public class Main {
 				String id = sc.next();
 				System.out.print("비밀번호 입력 : ");
 				String pw = sc.next();
-				String nick = sc.next();
-				String name = nick + "님 환영합니다.";
+				
+				DTO info = controller.login(id, pw);
+
+				String name = info.getNick() + "님 환영합니다.";
 				for (int i = 0; i < name.length(); i++) {
 					System.out.print(name.charAt(i));
 					try {
@@ -65,12 +67,11 @@ public class Main {
 				}
 				
 				System.out.println();
-				DTO info = controller.login(id, pw);
-				if (info != null) {
-					System.out.println(info.getNick() + "님 환영합니다.");		//로그인 성공시 닉네임 출력
-				} else {
-					System.out.println("존재하지 않는 ID입니다");				//실패시
-				}
+//				if (info != null) {
+//					System.out.println(info.getNick() + "님 환영합니다.");		//로그인 성공시 닉네임 출력
+//				} else {
+//					System.out.println("존재하지 않는 ID입니다");				//실패시
+//				}
 				System.out.println();
 
 				while (true) {
