@@ -48,7 +48,25 @@ public class Main {
 				String id = sc.next();
 				System.out.print("비밀번호 입력 : ");
 				String pw = sc.next();
+				String nic = sc.next();
+				String name = nic + "님 환영합니다.";
+				for(int i =0; i < name.length(); i++) {
+					
+				System.out.print(name.charAt(i));
+				try {
+					Thread.sleep(50);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				
+				}
+				System.out.println();
+				
+//				while (true) {
+//					System.out.print("경로선택 >> 1.떡잎마을 2.떡잎 유치원");
+//					int num = sc.nextInt();
+//					break;
+//				}
 				
 			} else if (menu == 3) {
 				
