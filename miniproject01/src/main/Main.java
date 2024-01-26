@@ -73,9 +73,9 @@ public class Main {
 				System.out.println();
 				DTO info = controller.login(id, pw);
 				if (info != null) {
-					System.out.println(info.getNick() + "님 환영합니다.");
+					System.out.println(info.getNick() + "님 환영합니다.");		//로그인 성공시 닉네임 출력
 				} else {
-					System.out.println("존재하지 않는 ID입니다");
+					System.out.println("존재하지 않는 ID입니다");				//실패시
 				}
 				System.out.println();
 
