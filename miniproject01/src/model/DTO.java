@@ -2,17 +2,25 @@ package model;
 
 public class DTO {
 
-	private double exp = 0.0; // 경험치
-	private int lv = 1; // 레벨
-	private int hp = 40; // 체력
-	private int yg = 1; // 요구르트
+	private String id;
+	private String pw;
+	private String nick;
 	
-	public DTO(double exp, int lv, int hp, int yg) {
+	public DTO(String id, String pw, String nick) {
 		super();
-		this.exp = exp;
-		this.lv = lv;
-		this.hp = hp;
-		this.yg = yg;
+		this.id = id;
+		this.pw = pw;
+		this.nick = nick;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	public String getPw() {
+		return pw;
+	}
+	public String getNick() {
+		return nick;
 	}
 	
 	

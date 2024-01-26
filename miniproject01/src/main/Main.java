@@ -38,7 +38,7 @@ public class Main {
 				System.out.print("비밀번호 입력 : ");
 				String pw = sc.next();
 				System.out.print("닉네임 입력 : ");
-				String nic = sc.next();
+				String nick = sc.next();
 				
 				
 			} else if (menu == 2) {
@@ -46,8 +46,8 @@ public class Main {
 				String id = sc.next();
 				System.out.print("비밀번호 입력 : ");
 				String pw = sc.next();
-				String nic = sc.next();
-				String name = nic + "님 환영합니다.";
+				String nick = sc.next();
+				String name = nick + "님 환영합니다.";
 				for(int i =0; i < name.length(); i++) {
 					
 				System.out.print(name.charAt(i));
