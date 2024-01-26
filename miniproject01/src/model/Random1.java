@@ -46,5 +46,10 @@ public class Random1 {
 
 		return na;
 	}
-
+	public int random4(int a) {
+		
+		a = ran.nextInt(10) + 11;
+		
+		return a;
+		}
 }

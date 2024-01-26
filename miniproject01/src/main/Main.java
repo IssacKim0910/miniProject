@@ -78,9 +78,10 @@ public class Main {
 					int num = sc.nextInt();
 					if (num == 1) {
 						System.out.println("떡잎마을 배달시작");
-						System.out.println(r.random2(0));
+						System.out.println(r.random3(0));
 					} else if (num == 2) {
 						System.out.println("떡잎 유치원 배달시작");
+						System.out.println(r.random2(0));
 						
 					} else if (num == 3){
 						break;
