@@ -52,6 +52,8 @@ public class Main {
 				String pw = sc.next();
 				System.out.print("닉네임 입력 : ");
 				String nick = sc.next();
+				dto = new DTO(id, pw, nick); 
+				int cnt = controller.join(dto);
 				
 				
 			} else if (menu == 2) {
