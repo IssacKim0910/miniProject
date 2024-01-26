@@ -2,11 +2,15 @@ package main;
 
 import java.util.Scanner;
 
+import model.Random;
+
 public class Main {
 
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
+		Random ran = new Random();
+		
 		System.out.println(
 				"                ` `   ```````                        ` `                               ```                          ```  `                                  \r\n"
 				+ "                  ````````##                         ``##`                           ``##`                          `###``                                  \r\n"
@@ -64,7 +68,8 @@ public class Main {
 					System.out.print("경로선택 >> [1]떡잎마을 [2]떡잎 유치원");
 					int num = sc.nextInt();
 					if(num == 1) {
-						System.out.printf("현재");
+						System.out.println("배달시작");
+						
 					}else if (num == 2) {
 						
 					}else {
