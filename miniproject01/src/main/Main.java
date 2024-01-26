@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println();
 		
 		Scanner sc = new Scanner(System.in);
 		System.out.println(
@@ -42,7 +41,6 @@ public class Main {
 				String nic = sc.next();
 				
 				
-				
 			} else if (menu == 2) {
 				System.out.print("아이디 입력 : ");
 				String id = sc.next();
@@ -62,11 +60,19 @@ public class Main {
 				}
 				System.out.println();
 				
-//				while (true) {
-//					System.out.print("경로선택 >> 1.떡잎마을 2.떡잎 유치원");
-//					int num = sc.nextInt();
-//					break;
-//				}
+				while (true) {
+					System.out.print("경로선택 >> [1]떡잎마을 [2]떡잎 유치원");
+					int num = sc.nextInt();
+					if(num == 1) {
+						System.out.printf("현재");
+					}else if (num == 2) {
+						
+					}else {
+						System.out.println("잘못입력 하셨습니다.");
+					}
+				
+				
+				}
 				
 			} else if (menu == 3) {
 				
