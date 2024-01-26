@@ -1,22 +1,16 @@
 package main;
 
 import java.util.Scanner;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import controller.Controller;
-import java.sql.SQLException;
-import model.DTO;
-import model.DAO;
 
-import model.Random;
+import controller.Controller;
+import model.DTO;
+import model.Random1;
 
 public class Main {
 
 	public static void main(String[] args) {
 
 		Scanner sc = new Scanner(System.in);
-		Random ran = new Random();
-
 		System.out.println(
 				"                ` `   ```````                        ` `                               ```                          ```  `                                  \r\n"
 						+ "                  ````````##                         ``##`                           ``##`                          `###``                                  \r\n"
@@ -37,9 +31,9 @@ public class Main {
 						+ "                         `##        ` ####################                          ` `##`             ``########### `                     `##`             ");
 
 		Controller controller = new Controller();
-
+		Random1 r = new Random1();
 		DTO dto = null;
-
+		
 		while (true) {
 			System.out.print("[1]회원등록  [2]로그인  [3]랭킹  [4]종료 >> ");
 			int menu = sc.nextInt();
@@ -81,15 +75,18 @@ public class Main {
 				System.out.println();
 
 				while (true) {
-					System.out.print("경로선택 >> [1]떡잎마을 [2]떡잎 유치원 >> ");
+					System.out.print("경로선택 >> [1]떡잎마을 [2]떡잎 유치원 [3]뒤로가기>> ");
 					int num = sc.nextInt();
 					if (num == 1) {
-						System.out.println("배달시작");
-
+						System.out.println("떡잎마을 배달시작");
+						System.out.println(r.random2(0));
 					} else if (num == 2) {
-
+						System.out.println("떡잎 유치원 배달시작");
+						
+					} else if (num == 3){
+						break;
 					} else {
-						System.out.println("잘못입력 하셨습니다.");
+						System.out.println("잘못 입력하셨습니다.");
 					}
 
 				}
