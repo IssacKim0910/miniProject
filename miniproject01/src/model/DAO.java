@@ -102,9 +102,9 @@ public class DAO {
 			conn = DriverManager.getConnection(db_url, db_id, db_pw);
 
 			if (conn != null) {
-				System.out.print("Connection 연결 성공");
+				System.out.println("Connection 연결 성공");
 			} else {
-				System.out.print("Connection 연결 실패");
+				System.out.println("Connection 연결 실패");
 			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
