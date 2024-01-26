@@ -28,7 +28,7 @@ public class Main {
 				+ "                         `##        ` ####################                          ` `##`             ``########### `                     `##`             ");
 		
 		
-		
+	
 		while(true) {
 			System.out.print("[1]회원등록  [2]로그인  [3]랭킹  [4]종료 >> ");
 			int menu = sc.nextInt();
