@@ -81,6 +81,9 @@ public class CharacterDAO {
         return Exp;
     }
 	
+	
+	
+	
 	// 경험치 누적
 	private CharacterDTO character;
 

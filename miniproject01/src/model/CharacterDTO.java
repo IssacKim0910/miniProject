@@ -46,4 +46,6 @@ public class CharacterDTO {
 	public void setExp(int Exp) {
 		this.Exp = Exp;
 	}
+	
+	
 }
