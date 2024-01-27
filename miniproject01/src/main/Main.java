@@ -119,6 +119,7 @@ public class Main {
 							System.out.println("HP : ");
 							System.out.println("초코비 : ");
 							
+							//임시로 작성한건데 DB랑 연결하는법을 찾는중..
 							DTO Info = cDAO.login(id, pw);
 							cDAO.eat(cDTO);
 							System.out.print(Info.getNick()+"님");

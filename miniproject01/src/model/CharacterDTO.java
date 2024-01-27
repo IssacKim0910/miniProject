@@ -22,7 +22,7 @@ public class CharacterDTO {
 	public String getNick() {
 		return Nick;
 	}
-
+	//Health -> Hp로 변경하였음
 	public int getHp() {
 		return Hp;
 	}
