@@ -4,7 +4,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.Controller;
+
 import javazoom.jl.player.MP3Player;
+
+import model.CharacterDAO;
+import model.CharacterDTO;
+
 import model.DTO;
 import model.Music;
 import model.MusicPlayer;
@@ -36,6 +41,8 @@ public class Main {
 
 		MusicPlayer musicPlayer = new MusicPlayer();
 		Music music = new Music(); //new Music(파일명, 파일 주소) 입력
+		CharacterDTO cDTO = new CharacterDTO(null, 0, 0, 0);
+		CharacterDAO cDAO = new CharacterDAO();
 		Controller controller = new Controller();
 		Random1 r = new Random1();
 		DTO dto = null;
@@ -111,7 +118,12 @@ public class Main {
 							System.out.println("레벨 : ");
 							System.out.println("HP : ");
 							System.out.println("초코비 : ");
-
+							
+							DTO Info = cDAO.login(id, pw);
+							cDAO.eat(cDTO);
+							System.out.print(Info.getNick()+"님");
+							System.out.println(cDTO.getHp());
+							
 						} else if (num == 4) { // 뒤로가기
 							String end = "로비로 돌아가는중...";
 							for (int i = 0; i < end.length(); i++) {
