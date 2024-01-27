@@ -28,7 +28,7 @@ public class DAO {
 			// 3.SQL문장 실행
 			// - PreparedStatement
 
-			String sql = "INSERT INTO MEMBER VALUES(?,?,?)";
+			String sql = "INSERT INTO JJANG VALUES(?,?,?)";
 			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
@@ -54,7 +54,7 @@ public class DAO {
 			// DB연동해주는 메소드
 			connection();
 
-			String sql = "SELECT * FROM MEMBER WHERE ID = ? AND PW = ?";
+			String sql = "SELECT * FROM JJANG WHERE ID = ? AND PW = ?";
 			psmt = conn.prepareStatement(sql);
 
 			psmt.setString(1, id);

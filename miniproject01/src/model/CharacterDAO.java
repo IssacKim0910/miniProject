@@ -1,20 +1,70 @@
 package model;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class CharacterDAO {
-	
+	Connection conn = null;
+	PreparedStatement psmt = null;
+	ResultSet rs = null;
 
 
 	//떡잎 마을 배달
 	
 	//유치원 배달
 	
-	//잠잘때
-	public void sleep() {
-		
-	}
-	//초코비 먹을때
 	
-	//삥뜯길때	
+	//잠잘때 미구현
+	public void sleep(CharacterDTO character) {
+		if (character.getLevel() == 1) {
+			character.setHp(10);
+		} else if (character.getLevel() == 2) {
+			character.setHp(20);
+		} else if (character.getLevel() == 3) {
+			character.setHp(30);
+		} else if (character.getLevel() == 4) {
+			character.setHp(40);
+		} else {
+			character.setHp(50);
+		}
+//		String sql = "UPDATE JJANG SET HP = ? WHERE NICK = ?";
+//		DTO dto = new DTO("id", "pw", "nick");
+//
+//		try {
+//		connection();
+//			psmt = conn.prepareStatement(sql);
+//			psmt.setInt(1, character.getHp());
+//			psmt.setString(2, dto.getNick());
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//		close();
+	}
+	
+	//초코비 먹을때 
+	public void eat(CharacterDTO character) {
+		character.setHp(character.getHp() + 3);
+
+		CharacterDTO cDTO = new CharacterDTO("null", 0, 0, 0);
+		DTO dto = new DTO("id", "pw", "nick");
+		String sql = "UPDATE JJANG SET HP = HP+ ? WHERE NICK = ?";
+
+		int a = cDTO.getHp() + 3;
+		try {
+			connection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, a);
+			psmt.setString(2, dto.getNick());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+
+	}
+	
 
 	// 판매
 	public int sellItem(Yg Yg) {
@@ -38,7 +88,10 @@ public class CharacterDAO {
         this.character = character;
     }
 
-    public void increaseExp(int exp) {
+    public CharacterDAO() {
+
+	}
+	public void increaseExp(int exp) {
         character.setExp(character.getExp() + exp);
         if (character.getExp() >= 20) {
             levelUp();
@@ -66,4 +119,71 @@ public class CharacterDAO {
             }
         }
     }
+	public DTO login(String id, String pw) {
+
+		DTO info = null;
+
+		try {
+			connection();
+			String sql = "SELECT * FROM JJANG WHERE ID = ? AND PW = ?";
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setString(1, id);
+			psmt.setString(2, pw);
+
+			rs = psmt.executeQuery();
+
+			if (rs.next() == true) {
+				String login_id = rs.getString(1);
+				String login_pw = rs.getString(2);
+				String login_nick = rs.getString(3);
+
+				info = new DTO(login_id, login_pw, login_nick);
+
+			}
+
+		} catch (Exception e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return info;
+
+	}
+	private void connection() {
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+
+			String db_url = "jdbc:oracle:thin:@project-db-campus.smhrd.com:1524:xe";
+			String db_id = "campus_23K_AI18_p1_6";
+			String db_pw = "smhrd6";
+			conn = DriverManager.getConnection(db_url, db_id, db_pw);
+
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void close() {
+
+		try {
+			if (rs != null) {
+				rs.close();
+			}
+			if (psmt != null) {
+				psmt.close();
+			}
+			if (conn != null) {
+				conn.close();
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
