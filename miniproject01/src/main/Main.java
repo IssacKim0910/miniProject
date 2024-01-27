@@ -1,9 +1,13 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.Controller;
+import javazoom.jl.player.MP3Player;
 import model.DTO;
+import model.Music;
+import model.MusicPlayer;
 import model.Random1;
 
 public class Main {
@@ -30,11 +34,14 @@ public class Main {
 						+ "                  ###`  ``##         `###````````````````` `                         ``##`           `####` ` `  `#####``                   ##`             \r\n"
 						+ "                         `##        ` ####################                          ` `##`             ``########### `                     `##`             ");
 
+		MusicPlayer musicPlayer = new MusicPlayer();
+		Music music = new Music(); //new Music(파일명, 파일 주소) 입력
 		Controller controller = new Controller();
 		Random1 r = new Random1();
 		DTO dto = null;
 
 		while (true) {
+			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작
 			System.out.print("[1]회원가입  [2]로그인  [3]랭킹  [4]게임종료 >> ");
 			int menu = sc.nextInt();
 			if (menu == 1) { // 회원가입
@@ -47,6 +54,7 @@ public class Main {
 				String nick = sc.next();
 				dto = new DTO(id, pw, nick);
 				int cnt = controller.join(dto);
+				musicPlayer.stopMusic("BGM1"); // 다 입력하면 브금 종료 -> 필요한 곳에 필요한 브금만 출력되도록 하기 위한 조치
 
 			} else if (menu == 2) { // 로그인
 				System.out.print("아이디 입력 : ");
