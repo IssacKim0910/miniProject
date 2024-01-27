@@ -14,11 +14,35 @@ public class CharacterDAO {
 	
 	//유치원 배달
 	
-	//잠잘때
-	public void sleep() {
-		
+	
+	//잠잘때 미구현
+	public void sleep(CharacterDTO character) {
+		if (character.getLevel() == 1) {
+			character.setHp(10);
+		} else if (character.getLevel() == 2) {
+			character.setHp(20);
+		} else if (character.getLevel() == 3) {
+			character.setHp(30);
+		} else if (character.getLevel() == 4) {
+			character.setHp(40);
+		} else {
+			character.setHp(50);
+		}
+//		String sql = "UPDATE JJANG SET HP = ? WHERE NICK = ?";
+//		DTO dto = new DTO("id", "pw", "nick");
+//
+//		try {
+//		connection();
+//			psmt = conn.prepareStatement(sql);
+//			psmt.setInt(1, character.getHp());
+//			psmt.setString(2, dto.getNick());
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}finally {
+//		close();
 	}
-	//초코비 먹을때
+	
+	//초코비 먹을때 
 	public void eat(CharacterDTO character) {
 		character.setHp(character.getHp() + 3);
 
