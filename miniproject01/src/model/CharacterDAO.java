@@ -65,38 +65,6 @@ public class CharacterDAO {
 
 	}
 	
-	
-	// 판매-진행중
-//	public void sellYg();
-//
-//	{
-//
-
-//
-//       return Exp;
-//    }
-//
-//	if(Exp>0)
-//	{
-//		System.out.println("아이템을 판매하여 경험치 " + Exp + "를 획득하였습니다.");
-//	}else if(Exp<0)
-//	{
-//		System.out.println("마이너스 경험치를 얻었습니다. 경험치가 " + Math.abs(Exp) + "만큼 감소하였습니다.");
-//
-//	}}
-//
-//	branch'master'
-//	of https:// github.com/2021-SMHRD-KDT-AI-18/fouthrepo.git
-
-//		if (Exp > 0) {
-//			System.out.println("아이템을 판매하여 경험치 " + Exp + "를 획득하였습니다.");
-//		} else if (Exp < 0) {
-//			System.out.println("마이너스 경험치를 얻었습니다. 경험치가 " + Math.abs(Exp) + "만큼 감소하였습니다.");
-//
-//		}
-//	}
-
-
 	// 경험치 누적
 	private static final int EXP_FOR_LEVEL_UP = 100;
 	private CharacterDTO character;
@@ -107,7 +75,8 @@ public class CharacterDAO {
 	    checkLevelUp(character);
 	    saveCharacterExp(character);
 	}
-
+	
+    // 경험치를 db로
 	private void saveCharacterExp(CharacterDTO character) {
 	    try {
 	        connection(); // 데이터베이스 연결
@@ -155,30 +124,6 @@ public class CharacterDAO {
             }
         }
     }
-
-	// 레벨업
-
-	private void checkLevelUp(CharacterDTO character) {
-		CharacterDTO cDTO = new CharacterDTO("null", 0, 0, 0);
-		DTO dto = new DTO("id", "pw", "nick");
-		String sql = "UPDATE JJANG SET LV = LV + ? WHERE NICK = ?";
-	
-		if (character.getExp() >= 100) {
-			int currentLevel = character.getLevel();
-			int newLevel = currentLevel + 1;
-
-			if (newLevel <= 5) {
-				character.setLevel(newLevel);
-				character.setExp(0);
-				System.out.println("레벨이 증가했습니다! 현재 레벨: " + newLevel);
-			} else {
-				System.out.println("최대 레벨에 도달했습니다!");
-			}
-		}
-	}
-
-
-
 
 	public DTO login(String id, String pw) {
 

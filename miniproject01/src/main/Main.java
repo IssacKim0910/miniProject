@@ -40,7 +40,6 @@ public class Main {
 						+ "                         `##        ` ####################                          ` `##`             ``########### `                     `##`             ");
 
 //		MusicPlayer musicPlayer = new MusicPlayer();
-//		Music music = new Music(); //new Music(파일명, 파일 주소) 입력
 		CharacterDTO cDTO = new CharacterDTO(null, 0, 0, 0);
 		CharacterDAO cDAO = new CharacterDAO();
 		Controller controller = new Controller();
@@ -52,7 +51,6 @@ public class Main {
 //			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작
 
 //			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작(음악이 없는 상태에서 Ctrl + f11하면 오류남)
-// 'master' of https://github.com/2021-SMHRD-KDT-AI-18/fouthrepo.git
 			System.out.print("[1]회원가입  [2]로그인  [3]랭킹  [4]게임종료 >> ");
 			int menu = sc.nextInt();
 			if (menu == 1) { // 회원가입
