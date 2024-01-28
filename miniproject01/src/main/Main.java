@@ -48,7 +48,7 @@ public class Main {
 		DTO dto = null;
 
 		while (true) {
-			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작
+//			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작(음악이 없는 상태에서 Ctrl + f11하면 오류남)
 			System.out.print("[1]회원가입  [2]로그인  [3]랭킹  [4]게임종료 >> ");
 			int menu = sc.nextInt();
 			if (menu == 1) { // 회원가입
@@ -61,7 +61,7 @@ public class Main {
 				String nick = sc.next();
 				dto = new DTO(id, pw, nick);
 				int cnt = controller.join(dto);
-				musicPlayer.stopMusic("BGM1"); // 다 입력하면 브금 종료 -> 필요한 곳에 필요한 브금만 출력되도록 하기 위한 조치
+//				musicPlayer.stopMusic("BGM1"); // 다 입력하면 브금 종료 -> 필요한 곳에 필요한 브금만 출력되도록 하기 위한 조치
 
 			} else if (menu == 2) { // 로그인
 				System.out.print("아이디 입력 : ");
