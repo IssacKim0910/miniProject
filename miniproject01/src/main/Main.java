@@ -48,7 +48,11 @@ public class Main {
 		DTO dto = null;
 		int num = 0;
 		while (true) {
+<<<<<<< HEAD
 //			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작
+=======
+//			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작(음악이 없는 상태에서 Ctrl + f11하면 오류남)
+>>>>>>> branch 'master' of https://github.com/2021-SMHRD-KDT-AI-18/fouthrepo.git
 			System.out.print("[1]회원가입  [2]로그인  [3]랭킹  [4]게임종료 >> ");
 			int menu = sc.nextInt();
 			if (menu == 1) { // 회원가입
