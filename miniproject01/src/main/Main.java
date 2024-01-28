@@ -1,11 +1,18 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import controller.Controller;
+
+import javazoom.jl.player.MP3Player;
+
 import model.CharacterDAO;
 import model.CharacterDTO;
+
 import model.DTO;
+import model.Music;
+import model.MusicPlayer;
 import model.Random1;
 
 public class Main {
@@ -31,13 +38,17 @@ public class Main {
 						+ "                  ###   ``##         `###`             `       `            `  ``    ``##`          ###`            ``##`                   ##`             \r\n"
 						+ "                  ###`  ``##         `###````````````````` `                         ``##`           `####` ` `  `#####``                   ##`             \r\n"
 						+ "                         `##        ` ####################                          ` `##`             ``########### `                     `##`             ");
+
+//		MusicPlayer musicPlayer = new MusicPlayer();
+//		Music music = new Music(); //new Music(파일명, 파일 주소) 입력
 		CharacterDTO cDTO = new CharacterDTO(null, 0, 0, 0);
 		CharacterDAO cDAO = new CharacterDAO();
 		Controller controller = new Controller();
 		Random1 r = new Random1();
 		DTO dto = null;
-
+		int num = 0;
 		while (true) {
+//			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작
 			System.out.print("[1]회원가입  [2]로그인  [3]랭킹  [4]게임종료 >> ");
 			int menu = sc.nextInt();
 			if (menu == 1) { // 회원가입
@@ -50,6 +61,7 @@ public class Main {
 				String nick = sc.next();
 				dto = new DTO(id, pw, nick);
 				int cnt = controller.join(dto);
+//				musicPlayer.stopMusic("BGM1"); // 다 입력하면 브금 종료 -> 필요한 곳에 필요한 브금만 출력되도록 하기 위한 조치
 
 			} else if (menu == 2) { // 로그인
 				System.out.print("아이디 입력 : ");
@@ -58,7 +70,7 @@ public class Main {
 				String pw = sc.next();
 
 				DTO info = controller.login(id, pw);
-				int num = 0;
+
 				if (info == null) {
 					System.out.println("로그인 실패");
 				} else if (info != null) {
@@ -87,7 +99,7 @@ public class Main {
 					System.out.println();
 
 					while (life > 0) { // 게임진행
-						System.out.print("경로선택 >> [1]떡잎마을 [2]떡잎 유치원 [3]캐릭터정보 [4]로비로 돌아가기>> ");
+						System.out.print("경로선택 >> [1]떡잎마을 [2]떡잎 유치원 [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
 						num = sc.nextInt();
 
 						if (num == 1) { // 떡잎마을
@@ -106,14 +118,41 @@ public class Main {
 							System.out.println("레벨 : ");
 							System.out.println("HP : ");
 							System.out.println("초코비 : ");
-							
-							//임시로 작성한건데 DB랑 연결하는법을 찾는중..
+							System.out.println("남은 배달횟수 : " + life);
+							// 임시로 작성한건데 DB랑 연결하는법을 찾는중..
 							DTO Info = cDAO.login(id, pw);
 							cDAO.eat(cDTO);
-							System.out.print(Info.getNick()+"님");
 							System.out.println(cDTO.getHp());
-							
-						} else if (num == 4) { // 뒤로가기
+						} else if (num == 4) { // 초코비 먹기
+							life++; // 배달횟수 1회 추가
+							cDAO.eat(cDTO);// 체력 3회복
+							String a = "초코비를 먹어 체력과 배달횟수가 회복됩니다.";
+							for (int i = 0; i < a.length(); i++) {
+								System.out.print(a.charAt(i));
+								try {
+									Thread.sleep(50);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
+							System.out.println();
+							System.out.println("체력 + 3, 배달횟수 + 1");
+						} else if (num == 5) { // 잠자기
+							cDAO.sleep(cDTO);
+							life = r.random4(0);
+							String a = "자는중....              ";
+							for (int i = 0; i < a.length(); i++) {
+								System.out.print(a.charAt(i));
+								try {
+									Thread.sleep(100);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
+							System.out.println();
+							System.out.println("배달 가능횟수가 초기화 되었습니다.");
+							System.out.println("남은 배달횟수 : " + life);
+						} else if (num == 6) { // 뒤로가기
 							String end = "로비로 돌아가는중...";
 							for (int i = 0; i < end.length(); i++) {
 								System.out.print(end.charAt(i));
@@ -126,25 +165,24 @@ public class Main {
 							}
 							System.out.println();
 							break;
-
-						}
-
-						else {
+						} else {
 							System.out.println("잘못 입력하셨습니다.");
 						}
-					}
-				}
-				if (num != 4) {
-					String end = "남은 배달 횟수를 모두 소진하여 종료합니다.";
-					for (int i = 0; i < end.length(); i++) {
-						System.out.print(end.charAt(i));
-						try {
-							Thread.sleep(50);
-						} catch (InterruptedException e) {
-							e.printStackTrace();
+
+						if (life <= 0) {
+							String end = "남은 배달 횟수를 모두 소진하여 종료합니다.";
+							for (int i = 0; i < end.length(); i++) {
+								System.out.print(end.charAt(i));
+								try {
+									Thread.sleep(50);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+							}
+							System.out.println();
+
 						}
 					}
-					System.out.println();
 				}
 			} else if (menu == 3) { // 랭킹
 				for (int i = 0; i < 10; i++) {

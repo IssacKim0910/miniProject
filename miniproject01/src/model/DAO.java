@@ -28,8 +28,8 @@ public class DAO {
 			// 3.SQL문장 실행
 			// - PreparedStatement
 
-			String sql = "INSERT INTO JJANG VALUES(?,?,?)";
-			psmt = conn.prepareStatement(sql);
+			String sql = "INSERT INTO JJANG VALUES(?,?,?,1,20,0)"; //회원가입 하면 1레벨 기본값 세팅
+			psmt = conn.prepareStatement(sql);					   // 1레벨 Hp 20 Exp 0
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
 			psmt.setString(3, nick);
