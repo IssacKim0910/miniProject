@@ -71,7 +71,7 @@ public class CharacterDAO {
 //
 //	{
 //
-<<<<<<< HEAD
+
 //
 //       return Exp;
 //    }
@@ -87,7 +87,7 @@ public class CharacterDAO {
 //
 //	branch'master'
 //	of https:// github.com/2021-SMHRD-KDT-AI-18/fouthrepo.git
-=======
+
 //		if (Exp > 0) {
 //			System.out.println("아이템을 판매하여 경험치 " + Exp + "를 획득하였습니다.");
 //		} else if (Exp < 0) {
@@ -96,7 +96,7 @@ public class CharacterDAO {
 //		}
 //	}
 
->>>>>>> branch 'master' of https://github.com/2021-SMHRD-KDT-AI-18/fouthrepo.git
+
 	// 경험치 누적
 	private static final int EXP_FOR_LEVEL_UP = 100;
 	private CharacterDTO character;
@@ -157,7 +157,7 @@ public class CharacterDAO {
     }
 
 	// 레벨업
-<<<<<<< HEAD
+
 	private void checkLevelUp(CharacterDTO character) {
 		CharacterDTO cDTO = new CharacterDTO("null", 0, 0, 0);
 		DTO dto = new DTO("id", "pw", "nick");
@@ -176,9 +176,9 @@ public class CharacterDAO {
 			}
 		}
 	}
-=======
 
->>>>>>> branch 'master' of https://github.com/2021-SMHRD-KDT-AI-18/fouthrepo.git
+
+
 
 	public DTO login(String id, String pw) {
 
