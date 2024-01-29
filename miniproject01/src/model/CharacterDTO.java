@@ -23,6 +23,12 @@ public class CharacterDTO {
 
 	}
 
+	public CharacterDTO(String nick2, int lv) {
+		
+		this.Nick = nick2;
+		Level = lv;
+	}
+
 	
 	public CharacterDTO(String id, String pw, String nick, int level, int hp, int exp, int cb, int life) {
 		super();

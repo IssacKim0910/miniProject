@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Random;
 
 import controller.Controller;
@@ -449,6 +450,29 @@ public class CharacterDAO {
 		return na;
 	}
 
+	public ArrayList<CharacterDTO> rank() {
+	     	
+	      ArrayList<CharacterDTO> rank1 = new ArrayList<>();
+	      try {
+	         connection();
+	         String sql = "SELECT * FROM JJANG ORDER BY EXP DESC";
+	         psmt = conn.prepareStatement(sql);
+	         rs= psmt.executeQuery();
+	         while(rs.next()) {
+	            String nick = rs.getString("NICK");
+	            int lv = rs.getInt("LV");
+	            CharacterDTO cDTO = new CharacterDTO(nick,lv);
+	            rank1.add(cDTO);
+	         }
+	         
+	      }catch(Exception e){
+	         e.printStackTrace();
+	      } finally {
+	         close();
+	      }
+	      return rank1;
+	   }
+	
 	// 떡잎마을
 	public String random3(CharacterDTO character) {
 		na = "";
