@@ -12,6 +12,7 @@ public class Random1 {
 
 		if (a >= 1 && a <= 20) {
 			na = "유리";
+			
 		} else if (a >= 21 && a <= 40) {
 			na = "훈발놈";
 			
