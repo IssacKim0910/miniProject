@@ -4,6 +4,8 @@ public class CharacterDTO {
 
 	private static final int MAX_LEVEL = 5; // 최종 레벨
 
+	private String id;
+	private String pw;
 	private String Nick;
 	private int Level = 1; // 레벨
 	private int Exp; // 경험치
@@ -19,6 +21,26 @@ public class CharacterDTO {
 
 	}
 
+
+	public CharacterDTO(String id, String pw, String nick, int level, int hp, int exp) {
+		super();
+		this.id = id;
+		this.pw = pw;
+		Nick = nick;
+		Level = level;
+		Exp = exp;
+		Hp = hp;
+		
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public String getPw() {
+		return pw;
+	}
+	
 	public String getNick() {
 		return Nick;
 	}

@@ -122,7 +122,12 @@ public class Main {
 							System.out.println("초코비 : ");
 							System.out.println("남은 배달횟수 : " + life);
 							// 임시로 작성한건데 DB랑 연결하는법을 찾는중..
-							DTO Info = cDAO.login(id, pw);
+							// 임시로 작성한건데 DB랑 연결하는법을 찾는중..
+							CharacterDTO Info = cDAO.login(id,pw);
+							
+							System.out.println(Info.getNick());
+							System.out.println(Info.getHp());
+							System.out.println(Info.getLevel());
 							cDAO.eat(cDTO);
 							System.out.println(cDTO.getHp());
 						} else if (num == 4) { // 초코비 먹기

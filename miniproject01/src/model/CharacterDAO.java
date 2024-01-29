@@ -44,18 +44,24 @@ public class CharacterDAO {
 
 	// 초코비 먹을때
 	public void eat(CharacterDTO character) {
-		character.setHp(character.getHp() + 3);
 
-		CharacterDTO cDTO = new CharacterDTO("null", 0, 0, 0);
-		DTO dto = new DTO("id", "pw", "nick");
-		String sql = "UPDATE JJANG SET HP = HP+ ? WHERE NICK = ?";
+		String sql1 = "SELECT HP FROM JJANG WHERE NICK = ?";
 
-		int a = cDTO.getHp() + 3;
+		String sql = "UPDATE JJANG SET HP = ? + 3 WHERE NICK = ?";
+
 		try {
 			connection();
-			psmt = conn.prepareStatement(sql);
-			psmt.setInt(1, a);
-			psmt.setString(2, dto.getNick());
+			psmt = conn.prepareStatement(sql1);
+			psmt.setString(1, character.getNick());
+
+			rs = psmt.executeQuery();
+			if (rs.next()) {
+				int hp = rs.getInt("HP");
+
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, hp);
+				psmt.setString(2, character.getNick());
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,70 +70,70 @@ public class CharacterDAO {
 		}
 
 	}
-	
+
 	// 경험치 누적
 	private static final int EXP_FOR_LEVEL_UP = 100;
 	private CharacterDTO character;
 
 	public void increaseExp(int exp) {
-	    int currentExp = character.getExp();
-	    character.setExp(currentExp + exp);
-	    checkLevelUp(character);
-	    saveCharacterExp(character);
+		int currentExp = character.getExp();
+		character.setExp(currentExp + exp);
+		checkLevelUp(character);
+		saveCharacterExp(character);
 	}
-	
-    // 경험치를 db로
+
+	// 경험치를 db로
 	private void saveCharacterExp(CharacterDTO character) {
-	    try {
-	        connection(); // 데이터베이스 연결
-	        String sql = "UPDATE JJANG SET EXP = ? WHERE NICK = ?"; // 경험치 값을 업데이트하는 SQL 쿼리
-	        psmt = conn.prepareStatement(sql);
-	        
-	        psmt.setInt(1, character.getExp());
-	        psmt.setString(2, character.getNick());
-	        
-	        psmt.executeUpdate();
-	        
-	    } catch (Exception e) {
-	        e.printStackTrace();
-	    } finally {
-	        close();
-	    }
+		try {
+			connection(); // 데이터베이스 연결
+			String sql = "UPDATE JJANG SET EXP = ? WHERE NICK = ?"; // 경험치 값을 업데이트하는 SQL 쿼리
+			psmt = conn.prepareStatement(sql);
+
+			psmt.setInt(1, character.getExp());
+			psmt.setString(2, character.getNick());
+
+			psmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
 	}
-	
+
 	// 레벨업
-    public void checkLevelUp(CharacterDTO character) {
-        CharacterDTO cDTO = new CharacterDTO("null", 0, 0, 0);
-        DTO dto = new DTO("id", "pw", "nick");
-        String sql = "UPDATE JJANG SET LV = LV + ? WHERE NICK = ?";
-        int currentExp = character.getExp();
-        if (currentExp >= EXP_FOR_LEVEL_UP) {
-            int currentLevel = character.getLevel();
-            if (currentLevel < 5) {
-                character.setLevel(currentLevel + 1);
-                character.setExp(currentExp - EXP_FOR_LEVEL_UP);
-                System.out.println("레벨이 증가했습니다! 현재 레벨: " + character.getLevel());
+	public void checkLevelUp(CharacterDTO character) {
+		CharacterDTO cDTO = new CharacterDTO("null", 0, 0, 0);
+		DTO dto = new DTO("id", "pw", "nick");
+		String sql = "UPDATE JJANG SET LV = LV + ? WHERE NICK = ?";
+		int currentExp = character.getExp();
+		if (currentExp >= EXP_FOR_LEVEL_UP) {
+			int currentLevel = character.getLevel();
+			if (currentLevel < 5) {
+				character.setLevel(currentLevel + 1);
+				character.setExp(currentExp - EXP_FOR_LEVEL_UP);
+				System.out.println("레벨이 증가했습니다! 현재 레벨: " + character.getLevel());
 
-                try {
-                    connection();
-                    psmt = conn.prepareStatement(sql);
-                    psmt.setInt(1, 1); // 레벨 업 증가량 설정
-                    psmt.setString(2, character.getNick());
-                    psmt.executeUpdate();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    close();
-                }
-            } else {
-                System.out.println("최대 레벨에 도달했습니다!");
-            }
-        }
-    }
+				try {
+					connection();
+					psmt = conn.prepareStatement(sql);
+					psmt.setInt(1, 1); // 레벨 업 증가량 설정
+					psmt.setString(2, character.getNick());
+					psmt.executeUpdate();
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					close();
+				}
+			} else {
+				System.out.println("최대 레벨에 도달했습니다!");
+			}
+		}
+	}
 
-	public DTO login(String id, String pw) {
+	public CharacterDTO login(String id, String pw) {
 
-		DTO info = null;
+		CharacterDTO info = null;
 
 		try {
 			connection();
@@ -140,11 +146,15 @@ public class CharacterDAO {
 			rs = psmt.executeQuery();
 
 			if (rs.next() == true) {
-				String login_id = rs.getString(1);
-				String login_pw = rs.getString(2);
-				String login_nick = rs.getString(3);
 
-				info = new DTO(login_id, login_pw, login_nick);
+				String login_id = rs.getString("ID");
+				String login_pw = rs.getString("PW");
+				String login_nick = rs.getString("NICK");
+				int Lv = rs.getInt(4);
+				int Hp = rs.getInt(5);
+				int Exp = rs.getInt(6);
+
+				info = new CharacterDTO(login_id, login_pw, login_nick, Lv, Hp, Exp);
 
 			}
 
