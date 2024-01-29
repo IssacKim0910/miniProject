@@ -113,15 +113,17 @@ public class Main {
 							cInfo = cDAO.login(id, pw);
 							System.out.println("떡잎마을 배달시작");
 							System.out.println(cDAO.random3(cDTO));
+							cInfo = cDAO.login(id, pw);
 							System.out.println("남은 체력 : " + cInfo.getHp());
 							System.out.println("남은 배달횟수 : " + cInfo.getLife());
-
+							System.out.println("현재 경험치 : " + cInfo.getExp());
 						} else if (num == 2) { // 떡잎유치원
 
 							cDAO.delivery2(cDTO);
 							cInfo = cDAO.login(id, pw);
 							System.out.println("떡잎 유치원 배달시작");
 							System.out.println(cDAO.random2(cDTO));
+							cInfo = cDAO.login(id, pw);
 							System.out.println("남은 체력 : " + cInfo.getHp());
 							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 							System.out.println("현재 경험치 : " + cInfo.getExp());
@@ -129,7 +131,7 @@ public class Main {
 						} else if (num == 3) { // 캐릭터정보
 							cInfo = cDAO.login(id, pw);
 							System.out.println("레벨 : " + cInfo.getLevel());
-							System.out.println("체력 : " + cInfo.getHp());
+							System.out.println("남은 체력 : " + cInfo.getHp());
 							System.out.println("초코비 : " + cInfo.getCb() + "개");
 							System.out.println("남은 배달횟수 : " + cInfo.getLife() + "회");
 							System.out.println("현재 경험치 : " + cInfo.getExp());
@@ -140,6 +142,7 @@ public class Main {
 							cDTO = cInfo;
 							life++; // 배달횟수 1회 추가
 							cDAO.eat(cDTO);// 체력 3회복
+							
 							String a = "초코비를 먹어 체력과 배달횟수가 회복됩니다.";
 							for (int i = 0; i < a.length(); i++) {
 								System.out.print(a.charAt(i));
@@ -154,7 +157,7 @@ public class Main {
 							System.out.println("체력 + 3, 배달횟수 + 1");
 						} else if (num == 5) { // 잠자기
 							cDAO.sleep(cDTO);
-							life = r.random4(0);
+							cInfo = cDAO.login(id, pw);
 							String a = "자는중....              ";
 							for (int i = 0; i < a.length(); i++) {
 								System.out.print(a.charAt(i));
@@ -166,7 +169,7 @@ public class Main {
 							}
 							System.out.println();
 							System.out.println("배달 가능횟수가 초기화 되었습니다.");
-							System.out.println("남은 배달횟수 : " + life);
+							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 						} else if (num == 6) { // 뒤로가기
 							String end = "로비로 돌아가는중...";
 							for (int i = 0; i < end.length(); i++) {
