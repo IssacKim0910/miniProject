@@ -44,32 +44,38 @@ public class CharacterDAO {
 
    // 초코비 먹을때
    public void eat(CharacterDTO character) {
+	    String selectSql = "SELECT HP FROM JJANG WHERE NICK = ?";
+	    String updateSql = "UPDATE JJANG SET HP = ? WHERE NICK = ?";
 
-      String sql1 = "SELECT HP FROM JJANG WHERE NICK = ?";
+	    try {
+	        connection();
+	        psmt = conn.prepareStatement(selectSql);
+	        psmt.setString(1, character.getNick());
 
-      String sql = "UPDATE JJANG SET HP = ? + 3 WHERE NICK = ?";
+	        rs = psmt.executeQuery();
+	        if (rs.next()) {
+	            int hp = rs.getInt("HP");
+	            int updatedHp = hp + 3;
 
-      try {
-         connection();
-         psmt = conn.prepareStatement(sql1);
-         psmt.setString(1, character.getNick());
+	            psmt = conn.prepareStatement(updateSql);
+	            psmt.setInt(1, updatedHp);
+	            psmt.setString(2, character.getNick());
 
-         rs = psmt.executeQuery();
-         if (rs.next()) {
-            int hp = rs.getInt("HP");
+	            // Update 쿼리 실행
+	            int rowsAffected = psmt.executeUpdate();
 
-            psmt = conn.prepareStatement(sql);
-            psmt.setInt(1, hp);
-            psmt.setString(2, character.getNick());
-         }
-
-      } catch (SQLException e) {
-         e.printStackTrace();
-      } finally {
-         close();
-      }
-
-   }
+	            if (rowsAffected > 0) {
+	                System.out.println("캐릭터의 체력이 성공적으로 업데이트되었습니다.");
+	            } else {
+	                System.out.println("캐릭터의 체력 업데이트에 실패했습니다.");
+	            }
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        close();
+	    }
+	}
 
    // 경험치 누적
    private static final int EXP_FOR_LEVEL_UP = 100;
