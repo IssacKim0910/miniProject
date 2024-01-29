@@ -11,6 +11,7 @@ import model.CharacterDAO;
 import model.CharacterDTO;
 
 import model.DTO;
+
 import model.Music;
 import model.MusicPlayer;
 import model.Random1;
@@ -88,7 +89,7 @@ public class Main {
 					}
 					System.out.println("님 환영합니다.");
 
-					int life = r.random4(0);
+					int life = r.random4(10)+11;
 					CharacterDTO cInfo = cDAO.login(id, pw);
 					cDTO = cInfo;
 					String ya = "하루최대 배달 가능횟수 : " + cInfo.getLife() + "회";
@@ -140,7 +141,6 @@ public class Main {
 						} else if (num == 4) { // 초코비 먹기
 
 							cDTO = cInfo;
-							life++; // 배달횟수 1회 추가
 							cDAO.eat(cDTO);// 체력 3회복
 							
 							String a = "초코비를 먹어 체력과 배달횟수가 회복됩니다.";
@@ -267,9 +267,9 @@ public class Main {
 
 				}
 			} else if (menu == 3) { // 랭킹
-
-				for (int i = 0; i < 10; i++) {
-					System.out.println((i + 1) + "위 : " + "\t 레벨 : ");
+				ArrayList<CharacterDTO> rank1  = cDAO.rank();
+				for (int i = 0; i < rank1.size(); i++) {
+					System.out.println((i + 1) + "위 : " + rank1.get(i).getNick() + " 레벨 : " + rank1.get(i).getLevel());
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
