@@ -10,6 +10,8 @@ public class CharacterDTO {
 	private int Level = 1; // 레벨
 	private int Exp; // 경험치
 	private int Hp; // 체력
+	private int Cb;
+	private int Life;
 	private int Yg; // 요구르트개수
 
 	public CharacterDTO(String nick, int level, int exp, int hp) {
@@ -21,8 +23,8 @@ public class CharacterDTO {
 
 	}
 
-
-	public CharacterDTO(String id, String pw, String nick, int level, int hp, int exp) {
+	
+	public CharacterDTO(String id, String pw, String nick, int level, int hp, int exp, int cb, int life) {
 		super();
 		this.id = id;
 		this.pw = pw;
@@ -30,9 +32,27 @@ public class CharacterDTO {
 		Level = level;
 		Exp = exp;
 		Hp = hp;
-		
+		Cb = cb;
+		Life = life;
+
 	}
-	
+
+
+	public static int getMaxLevel() {
+		return MAX_LEVEL;
+	}
+
+
+	public int getCb() {
+		return Cb;
+	}
+
+
+	public int getLife() {
+		return Life;
+	}
+
+
 	public String getId() {
 		return id;
 	}
@@ -46,9 +66,6 @@ public class CharacterDTO {
 	}
 	//Health -> Hp로 변경하였음
 	public int getHp() {
-		return Hp;
-	}
-	public int test() {
 		return Hp;
 	}
 
