@@ -101,7 +101,8 @@ public class Main {
 					System.out.println();
 
 					while (life > 0) { // 게임진행
-						System.out.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
+						System.out
+								.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
 						num = sc.nextInt();
 
 						if (num == 1) { // 떡잎마을
@@ -117,11 +118,13 @@ public class Main {
 							System.out.println("남은 배달횟수 : " + life);
 
 						} else if (num == 3) { // 캐릭터정보
-							
-							System.out.println("HP : ");
+
+							CharacterDTO Info = cDAO.login(id, pw);
+							System.out.println("HP : " + Info.getHp());
 							System.out.println("초코비 : ");
+							System.out.println("레벨 : " + Info.getLevel());
 							System.out.println("남은 배달횟수 : " + life);
-							
+
 						} else if (num == 4) { // 초코비 먹기
 							life++; // 배달횟수 1회 추가
 							cDAO.eat(cDTO);// 체력 3회복
