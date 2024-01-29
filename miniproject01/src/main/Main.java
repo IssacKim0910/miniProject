@@ -104,11 +104,11 @@ public class Main {
 						System.out
 								.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
 						num = sc.nextInt();
+						CharacterDTO cInfo = cDAO.login(id, pw);
+						cDTO = cInfo;
 
 						if (num == 1) { // 떡잎마을
 
-							CharacterDTO cInfo = cDAO.login(id, pw);
-							cDTO = cInfo;
 							cDAO.delivery1(cDTO);
 							cInfo = cDAO.login(id, pw);
 							System.out.println("떡잎마을 배달시작");
@@ -116,39 +116,43 @@ public class Main {
 							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 
 						} else if (num == 2) { // 떡잎유치원
-							CharacterDTO cInfo = cDAO.login(id, pw);
-							cDTO = cInfo;
+
 							cDAO.delivery2(cDTO);
 							cInfo = cDAO.login(id, pw);
 							System.out.println("떡잎 유치원 배달시작");
 							System.out.println(r.random2(0));
-							
+
 							System.out.println("남은 체력 : " + cInfo.getHp());
 							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 
 						} else if (num == 3) { // 캐릭터정보
-							CharacterDTO cInfo = cDAO.login(id, pw);
+
 							System.out.println("레벨 : " + cInfo.getLevel());
 							System.out.println("HP : " + cInfo.getHp());
 							System.out.println("초코비 : " + cInfo.getCb());
 							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 						} else if (num == 4) { // 초코비 먹기
-							CharacterDTO Info = cDAO.login(id,pw);
-							cDTO = Info;
-							life++; // 배달횟수 1회 추가
-							cDAO.eat(cDTO);// 체력 3회복
-							String a = "초코비를 먹어 체력과 배달횟수가 회복됩니다.";
-							for (int i = 0; i < a.length(); i++) {
-								System.out.print(a.charAt(i));
-								try {
-									Thread.sleep(50);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
+							
+							if (cInfo.getCb() > 1) {
+								CharacterDTO Info = cDAO.login(id, pw);
+								cDTO = Info;
+								life++; // 배달횟수 1회 추가
+								cDAO.eat(cDTO);// 체력 3회복
+								String a = "초코비를 먹어 체력과 배달횟수가 회복됩니다.";
+								for (int i = 0; i < a.length(); i++) {
+									System.out.print(a.charAt(i));
+									try {
+										Thread.sleep(50);
+									} catch (InterruptedException e) {
+										e.printStackTrace();
+									}
+									System.out.println();
+									System.out.println("남은 초코비 개수 : " + cInfo.getCb());
+									System.out.println("체력 + 3, 배달횟수 + 1");
 								}
+							} else {
+								System.out.println("초코비가 없습니다.");
 							}
-							System.out.println();
-							System.out.println("남은 초코비 개수 : ");
-							System.out.println("체력 + 3, 배달횟수 + 1");
 						} else if (num == 5) { // 잠자기
 							cDAO.sleep(cDTO);
 							life = r.random4(0);
