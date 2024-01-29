@@ -117,8 +117,81 @@ public class CharacterDAO {
 		}
 
 	}
+		
+	// 레벨업
+	public void LevelUp(CharacterDTO character) {
+		String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
+		String sql = "UPDATE JJANG SET LV = ? WHERE NICK = ? AND EXP = ?";
+		
+		try {
+			connection();
+			psmt = conn.prepareStatement(selectSql);
+			psmt.setString(1, character.getNick());
+			
+			
+			int Lv = rs.getInt("LV");
+			int Exp = rs.getInt("EXP");
+			rs = psmt.executeQuery();
+			if(Exp >= 20) {
+				if (rs.next()) {
+					Lv = rs.getInt("LV");
+					Exp = rs.getInt("EXP");
+					psmt = conn.prepareStatement(sql);
+					psmt.setInt(1, Lv+1);	
+					psmt.setString(2, character.getNick());
+					psmt.setInt(3, Exp);
 
-	// 잠잘때 미구현
+					int rowsAffected = psmt.executeUpdate();
+				}
+			} else if(Exp >= 40) {
+				if (rs.next()) {
+					Lv = rs.getInt("LV");
+					Exp = rs.getInt("EXP");
+					psmt = conn.prepareStatement(sql);
+					psmt.setInt(1, Lv+1);	
+					psmt.setString(2, character.getNick());
+					psmt.setInt(3, Exp);
+
+					int rowsAffected = psmt.executeUpdate();
+				}
+			} else if(Exp >= 80) {
+				if (rs.next()) {
+					Lv = rs.getInt("LV");
+					Exp = rs.getInt("EXP");
+					psmt = conn.prepareStatement(sql);
+					psmt.setInt(1, Lv+1);	
+					psmt.setString(2, character.getNick());
+					psmt.setInt(3, Exp);
+
+					int rowsAffected = psmt.executeUpdate();
+				}
+			} else if(Exp >= 140) {
+				if (rs.next()) {
+					Lv = rs.getInt("LV");
+					Exp = rs.getInt("EXP");
+					psmt = conn.prepareStatement(sql);
+					psmt.setInt(1, Lv+1);	
+					psmt.setString(2, character.getNick());
+					psmt.setInt(3, Exp);
+
+					int rowsAffected = psmt.executeUpdate();
+				}
+			}
+	
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+	}
+		
+	
+	
+	
+	// 잠잘때 구현
 	public void sleep(CharacterDTO character) {
 		String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
 		String sql = "UPDATE JJANG SET HP = ?, LIFE = ? WHERE NICK = ?";
@@ -130,15 +203,15 @@ public class CharacterDAO {
 			
 			
 			if (character.getLevel() == 1) {
-				character.setHp(10);
-			} else if (character.getLevel() == 2) {
 				character.setHp(20);
+			} else if (character.getLevel() == 2) {
+				character.setHp(25);
 			} else if (character.getLevel() == 3) {
 				character.setHp(30);
 			} else if (character.getLevel() == 4) {
-				character.setHp(40);
+				character.setHp(35);
 			} else {
-				character.setHp(50);
+				character.setHp(40);
 			}
 
 			rs = psmt.executeQuery();
@@ -200,65 +273,7 @@ public class CharacterDAO {
 		}
 	}
 
-	// 경험치 누적
-	private static final int EXP_FOR_LEVEL_UP = 100;
-	private CharacterDTO character;
-
-	public void increaseExp(int exp) {
-		int currentExp = character.getExp();
-		character.setExp(currentExp + exp);
-		checkLevelUp(character);
-		saveCharacterExp(character);
-	}
-
-	// 경험치를 db로
-	private void saveCharacterExp(CharacterDTO character) {
-		try {
-			connection(); // 데이터베이스 연결
-			String sql = "UPDATE JJANG SET EXP = ? WHERE NICK = ?"; // 경험치 값을 업데이트하는 SQL 쿼리
-			psmt = conn.prepareStatement(sql);
-
-			psmt.setInt(1, character.getExp());
-			psmt.setString(2, character.getNick());
-
-			psmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			close();
-		}
-	}
-
-	// 레벨업
-	public void checkLevelUp(CharacterDTO character) {
-		CharacterDTO cDTO = new CharacterDTO("null", 0, 0, 0);
-		DTO dto = new DTO("id", "pw", "nick");
-		String sql = "UPDATE JJANG SET LV = LV + ? WHERE NICK = ?";
-		int currentExp = character.getExp();
-		if (currentExp >= EXP_FOR_LEVEL_UP) {
-			int currentLevel = character.getLevel();
-			if (currentLevel < 5) {
-				character.setLevel(currentLevel + 1);
-				character.setExp(currentExp - EXP_FOR_LEVEL_UP);
-				System.out.println("레벨이 증가했습니다! 현재 레벨: " + character.getLevel());
-
-				try {
-					connection();
-					psmt = conn.prepareStatement(sql);
-					psmt.setInt(1, 1); // 레벨 업 증가량 설정
-					psmt.setString(2, character.getNick());
-					psmt.executeUpdate();
-				} catch (Exception e) {
-					e.printStackTrace();
-				} finally {
-					close();
-				}
-			} else {
-				System.out.println("최대 레벨에 도달했습니다!");
-			}
-		}
-	}
+	
 
 	public CharacterDTO login(String id, String pw) {
 
@@ -439,16 +454,17 @@ public class CharacterDAO {
 		na = "";
 		int a = ran.nextInt(100) + 1;
 
-		String selectSql = "SELECT EXP FROM JJANG WHERE NICK = ?";
+		String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
 		String updateSql = "UPDATE JJANG SET EXP = ? WHERE NICK = ?";
 		try {
 			connection();
 			psmt = conn.prepareStatement(selectSql);
 			psmt.setString(1, character.getNick());
+			rs = psmt.executeQuery();
 			if (a >= 1 && a <= 9) {
 				rs = psmt.executeQuery();
 				if (rs.next()) {
-
+		
 					int exp = rs.getInt("EXP");
 
 					int updateExp = exp + 4;
@@ -458,9 +474,10 @@ public class CharacterDAO {
 					psmt.setString(2, character.getNick());
 					// Update 쿼리 실행
 					int rowsAffected = psmt.executeUpdate();
+			
 				}
 			} else if (a >= 11 && a <= 50) {
-
+				if (rs.next()) {
 				int exp = rs.getInt("EXP");
 
 				int updateExp = exp + 2;
@@ -470,7 +487,19 @@ public class CharacterDAO {
 				psmt.setString(2, character.getNick());
 				// Update 쿼리 실행
 				int rowsAffected = psmt.executeUpdate();
+				}
+			} else {
+				if (rs.next()) {
+				int exp = rs.getInt("EXP");
 
+				int updateExp = exp;
+				psmt = conn.prepareStatement(updateSql);
+
+				psmt.setInt(1, updateExp);
+				psmt.setString(2, character.getNick());
+				// Update 쿼리 실행
+				int rowsAffected = psmt.executeUpdate();
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
