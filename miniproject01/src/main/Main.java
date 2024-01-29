@@ -126,6 +126,8 @@ public class Main {
 							System.out.println("남은 배달횟수 : " + life);
 
 						} else if (num == 4) { // 초코비 먹기
+							CharacterDTO Info = cDAO.login(id,pw);
+							cDTO = Info;
 							life++; // 배달횟수 1회 추가
 							cDAO.eat(cDTO);// 체력 3회복
 							String a = "초코비를 먹어 체력과 배달횟수가 회복됩니다.";
