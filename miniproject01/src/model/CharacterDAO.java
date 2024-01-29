@@ -13,12 +13,13 @@ public class CharacterDAO {
 	ResultSet rs = null;
 	Controller controller = new Controller();
 
-	// 떡잎 마을 배달
+	
 
-	// 배달 했을때
-	public void delivery(CharacterDTO character) {
-		String selectSql = "SELECT LIFE FROM JJANG WHERE NICK = ?";
-		String updateSql = "UPDATE JJANG SET LIFE = ? WHERE NICK = ?";
+	// 떡잎 마을
+	public void delivery1(CharacterDTO character) {
+
+		String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
+		String updateSql = "UPDATE JJANG SET HP = ? , LIFE = ? WHERE NICK = ?";
 
 		try {
 			connection();
@@ -27,29 +28,75 @@ public class CharacterDAO {
 
 			rs = psmt.executeQuery();
 			if (rs.next()) {
+				int hp = rs.getInt("HP");
+
+				int updatedHp = hp - 1;
+			
 				int life = rs.getInt("Life");
 				int updatedLife = life - 1;
-
+				
 				psmt = conn.prepareStatement(updateSql);
-				psmt.setInt(1, updatedLife);
-				psmt.setString(2, character.getNick());
-
-				// Update 쿼리 실행
+				psmt.setInt(1, updatedHp);
+				psmt.setInt(2, updatedLife);
+				psmt.setString(3, character.getNick());
 				int rowsAffected = psmt.executeUpdate();
 
 				if (rowsAffected > 0) {
-					System.out.println("캐릭터의 Life이 성공적으로 업데이트되었습니다.");
+					System.out.println("캐릭터의 체력이 성공적으로 업데이트되었습니다.");
 				} else {
-					System.out.println("캐릭터의 Life 업데이트에 실패했습니다.");
+					System.out.println("캐릭터의 체력 업데이트에 실패했습니다.");
 				}
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
 
+
 	}
+	
+	
+	// 떡잎 유치원
+		public void delivery2(CharacterDTO character) {
+			String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
+			String updateSql = "UPDATE JJANG SET HP = ? , LIFE = ? WHERE NICK = ?";
+
+			try {
+				connection();
+				psmt = conn.prepareStatement(selectSql);
+				psmt.setString(1, character.getNick());
+
+				rs = psmt.executeQuery();
+				if (rs.next()) {
+					int hp = rs.getInt("HP");
+	
+					int updatedHp = hp - 1;
+				
+					int life = rs.getInt("Life");
+					int updatedLife = life - 1;
+					
+					psmt = conn.prepareStatement(updateSql);
+					psmt.setInt(1, updatedHp);
+					psmt.setInt(2, updatedLife);
+					psmt.setString(3, character.getNick());
+					int rowsAffected = psmt.executeUpdate();
+
+					if (rowsAffected > 0) {
+						System.out.println("캐릭터의 체력이 성공적으로 업데이트되었습니다.");
+					} else {
+						System.out.println("캐릭터의 체력 업데이트에 실패했습니다.");
+					}
+				}
+				
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				close();
+			}
+
+		}
 
 //	public void delivery(CharacterDTO character) {
 //	    String selectSql = "SELECT LIFE FROM JJANG WHERE NICK = ?";

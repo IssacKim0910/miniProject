@@ -106,25 +106,32 @@ public class Main {
 						num = sc.nextInt();
 
 						if (num == 1) { // 떡잎마을
-							life--;
+
+							CharacterDTO cInfo = cDAO.login(id, pw);
+							cDTO = cInfo;
+							cDAO.delivery1(cDTO);
+							cInfo = cDAO.login(id, pw);
 							System.out.println("떡잎마을 배달시작");
 							System.out.println(r.random3(0));
-							System.out.println("남은 배달횟수 : " + life);
+							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 
 						} else if (num == 2) { // 떡잎유치원
-							life--;
+							CharacterDTO cInfo = cDAO.login(id, pw);
+							cDTO = cInfo;
+							cDAO.delivery2(cDTO);
+							cInfo = cDAO.login(id, pw);
 							System.out.println("떡잎 유치원 배달시작");
 							System.out.println(r.random2(0));
-							System.out.println("남은 배달횟수 : " + life);
+							
+							System.out.println("남은 체력 : " + cInfo.getHp());
+							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 
 						} else if (num == 3) { // 캐릭터정보
-
-							CharacterDTO Info = cDAO.login(id, pw);
-							System.out.println("HP : " + Info.getHp());
-							System.out.println("초코비 : ");
-							System.out.println("레벨 : " + Info.getLevel());
-							System.out.println("남은 배달횟수 : " + life);
-
+							CharacterDTO cInfo = cDAO.login(id, pw);
+							System.out.println("레벨 : " + cInfo.getLevel());
+							System.out.println("HP : " + cInfo.getHp());
+							System.out.println("초코비 : " + cInfo.getCb());
+							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 						} else if (num == 4) { // 초코비 먹기
 							CharacterDTO Info = cDAO.login(id,pw);
 							cDTO = Info;
