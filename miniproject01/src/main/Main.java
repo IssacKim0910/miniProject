@@ -197,9 +197,9 @@ public class Main {
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 							}
-							break;
 						}
 						System.out.println();
+						break;
 					}else if(cInfo.getHp() <= 0) {
 						System.out.println(""
 								+"\r\n"
