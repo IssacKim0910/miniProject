@@ -9,8 +9,12 @@ public class Random1 {
 	public String random2(int a) {
 		a = ran.nextInt(100) + 1;
 		// 떡잎 유치원
+		
+		
 		if (a >= 1 && a <= 20) {
 			na = "유리";
+			
+			
 		} else if (a >= 21 && a <= 40) {
 			na = "훈발놈";
 		} else if (a >= 41 && a <= 60) {
@@ -21,6 +25,7 @@ public class Random1 {
 			na = "원장님";
 		} else if (a == 85) {
 			na = "원장님, 초코비 획득!!";
+			
 		} else if (a >= 86 && a <= 100) {
 			na = "치타";
 		}
