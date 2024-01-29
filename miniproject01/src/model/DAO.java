@@ -6,14 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class DAO {
 
+
+public class DAO {
+	Random1 ran = new Random1();
 	Connection conn = null;
 	PreparedStatement psmt = null;
 	ResultSet rs = null;
-
+	int life = ran.random4(0);
 	public int join(DTO dto) {
-
+	
 		String id = dto.getId();
 		String pw = dto.getPw();
 		String nick = dto.getNick();
@@ -27,13 +29,13 @@ public class DAO {
 
 			// 3.SQL문장 실행
 			// - PreparedStatement
-
-			String sql = "INSERT INTO JJANG VALUES(?,?,?,1,20,0)"; //회원가입 하면 1레벨 기본값 세팅
+			
+			String sql = "INSERT INTO JJANG VALUES(?,?,?,1,20,0, 3, ?)"; //회원가입 하면 1레벨 기본값 세팅
 			psmt = conn.prepareStatement(sql);					   // 1레벨 Hp 20 Exp 0
 			psmt.setString(1, id);
 			psmt.setString(2, pw);
 			psmt.setString(3, nick);
-
+			psmt.setInt(4, life);
 			// executeUpdate()는 실행한 문장의 개수를 반환
 			cnt = psmt.executeUpdate();
 
@@ -68,7 +70,7 @@ public class DAO {
 
 			rs = psmt.executeQuery();
 
-			if (rs.next() == true) {
+			if (rs.next()) {
 				String login_id = rs.getString(1);
 				String login_pw = rs.getString(2);
 				String login_nick = rs.getString(3);
