@@ -190,16 +190,6 @@ public class CharacterDAO {
 	// 잠잘때 구현
 	public void sleep(CharacterDTO character) {
 
-		if (character.getLevel() == 1) {
-			character.setHp(10);
-		} else if (character.getLevel() == 2) {
-			character.setHp(20);
-		} else if (character.getLevel() == 3) {
-			character.setHp(30);
-		} else if (character.getLevel() == 4) {
-			character.setHp(40);
-		} else {
-			character.setHp(50);
 			String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
 			String sql = "UPDATE JJANG SET HP = ?, LIFE = ? WHERE NICK = ?";
 
@@ -237,19 +227,6 @@ public class CharacterDAO {
 				close();
 			}
 		}
-//		String sql = "UPDATE JJANG SET HP = ? WHERE NICK = ?";
-//		DTO dto = new DTO("id", "pw", "nick");
-//
-//		try {
-//		connection();
-//			psmt = conn.prepareStatement(sql);
-//			psmt.setInt(1, character.getHp());
-//			psmt.setString(2, dto.getNick());
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//		close();
-	}
 
 	// 초코비 먹을때
 
