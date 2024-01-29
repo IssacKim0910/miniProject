@@ -137,6 +137,7 @@ public class Main {
 									e.printStackTrace();
 								}
 							}
+							
 							System.out.println();
 							System.out.println("체력 + 3, 배달횟수 + 1");
 						} else if (num == 5) { // 잠자기
