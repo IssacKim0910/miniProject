@@ -26,6 +26,9 @@ public class CharacterDTO {
 	public int getHp() {
 		return Hp;
 	}
+	public int test() {
+		return Hp;
+	}
 
 	public int getLevel() {
 		return Level;
