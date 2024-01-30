@@ -77,7 +77,7 @@ public class Main {
 				if (info == null) {
 					System.out.println("로그인 실패");
 				} else if (info != null) {
-					String name = info.getNick();
+					String name = info.getNick() + "님 환영합니다.";
 					for (int i = 0; i < name.length(); i++) {
 						System.out.print(name.charAt(i));
 						try {
@@ -87,12 +87,13 @@ public class Main {
 						}
 
 					}
-					System.out.println("님 환영합니다.");
+					
 
 					int life = r.random4(10)+11;
 					CharacterDTO cInfo = cDAO.login(id, pw);
 					cDTO = cInfo;
-					String ya = "하루최대 배달 가능횟수 : " + cInfo.getLife() + "회";
+					String ya = "\n하루최대 배달 가능횟수 : " + cInfo.getLife() + "회 "
+							+ "\n간단한 설명\n떡잎유치원(Easy) : 기본경험치 +1, 보너스경험치 +2\n떡잎마을(Hard) : 기본경험치 +2 보너스경험치 +4";
 					for (int i = 0; i < ya.length(); i++) {
 						System.out.print(ya.charAt(i));
 						try {
@@ -102,7 +103,8 @@ public class Main {
 						}
 					}
 					System.out.println();
-
+					
+					
 					while (cInfo.getHp() > 0 && cInfo.getLife() > 0) { // 게임진행
 						cDAO.LevelUp(cDTO);
 						System.out.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
@@ -168,7 +170,7 @@ public class Main {
 								}
 							}
 							System.out.println();
-							System.out.println("배달 가능횟수가 초기화 되었습니다.");
+							System.out.println("배달 횟수가 초기화 되었습니다.");
 							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 						} else if (num == 6) { // 뒤로가기
 							String end = "로비로 돌아가는중...";
@@ -263,6 +265,17 @@ public class Main {
 								+ "     . .. .     .. . .!@@@@@,~#@@@@@@#-*@@@~,,$.  .,!#-,,,!@:,@@@=.     .  .  .  .  .  .  \r\n"
 								+ ".  .     .  .  .  .    *@#,.  ,*@@,.. .,*=, .  .  .  .  .  .  .##-  . ..        . .       \r\n"
 								+ "");
+						
+						String end = "과로사로 인해 사망...";
+						for (int i = 0; i < end.length(); i++) {
+							System.out.print(end.charAt(i));
+							try {
+								Thread.sleep(50);
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+							}
+						}
+						System.out.println();
 						break;
 					}
 					
