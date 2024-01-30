@@ -203,7 +203,7 @@ public class Main {
 							}
 						}
 						System.out.println();
-						break;
+						
 					}else if(cInfo.getHp() <= 0) {
 						System.out.println(""
 								+"\r\n"
@@ -278,7 +278,6 @@ public class Main {
 							}
 						}
 						System.out.println();
-						break;
 					}
 
 				}
@@ -348,6 +347,17 @@ public class Main {
 								+ "                     ~                                :.              \r\n"
 								+ "                     :                                :               \r\n" + "");
 
+				String ending = "다음에 또 봐요~~          ";
+				for (int i = 0; i < ending.length(); i++) {
+					System.out.print(ending.charAt(i));
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+
+				}
+				
 				break;
 			} else {
 				System.out.println("잘못 입력 하셨습니다.");
