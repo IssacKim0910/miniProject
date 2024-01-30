@@ -128,11 +128,11 @@ public class CharacterDAO {
 			connection();
 			psmt = conn.prepareStatement(selectSql);
 			psmt.setString(1, character.getNick());
-				
+
 			int Exp = 0;
 			int Lv = 0;
 			rs = psmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				Lv = rs.getInt("LV");
 				Exp = rs.getInt("EXP");
 			}
@@ -179,43 +179,43 @@ public class CharacterDAO {
 	// 잠잘때 구현
 	public void sleep(CharacterDTO character) {
 
-			String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
-			String sql = "UPDATE JJANG SET HP = ?, LIFE = ? WHERE NICK = ?";
+		String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
+		String sql = "UPDATE JJANG SET HP = ?, LIFE = ? WHERE NICK = ?";
 
-			try {
-				connection();
-				psmt = conn.prepareStatement(selectSql);
-				psmt.setString(1, character.getNick());
+		try {
+			connection();
+			psmt = conn.prepareStatement(selectSql);
+			psmt.setString(1, character.getNick());
 
-				if (character.getLevel() == 1) {
-					character.setHp(20);
-				} else if (character.getLevel() == 2) {
-					character.setHp(25);
-				} else if (character.getLevel() == 3) {
-					character.setHp(30);
-				} else if (character.getLevel() == 4) {
-					character.setHp(35);
-				} else {
-					character.setHp(40);
-				}
-
-				rs = psmt.executeQuery();
-				int life = random4(0);
-				if (rs.next()) {
-
-					psmt = conn.prepareStatement(sql);
-					psmt.setInt(1, character.getHp());
-					psmt.setInt(2, life);
-					psmt.setString(3, character.getNick());
-
-					int rowsAffected = psmt.executeUpdate();
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			} finally {
-				close();
+			if (character.getLevel() == 1) {
+				character.setHp(20);
+			} else if (character.getLevel() == 2) {
+				character.setHp(25);
+			} else if (character.getLevel() == 3) {
+				character.setHp(30);
+			} else if (character.getLevel() == 4) {
+				character.setHp(35);
+			} else {
+				character.setHp(40);
 			}
+
+			rs = psmt.executeQuery();
+			int life = random4(0);
+			if (rs.next()) {
+
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, character.getHp());
+				psmt.setInt(2, life);
+				psmt.setString(3, character.getNick());
+
+				int rowsAffected = psmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
 		}
+	}
 
 	// 초코비 먹을때
 
@@ -456,13 +456,14 @@ public class CharacterDAO {
 				if (rs.next()) {
 				int exp = rs.getInt("EXP");
 
-				int updateExp = exp + 2;
-				psmt = conn.prepareStatement(updateSql);
+					int updateExp = exp + 2;
+					psmt = conn.prepareStatement(updateSql);
 
-				psmt.setInt(1, updateExp);
-				psmt.setString(2, character.getNick());
-				// Update 쿼리 실행
-				int rowsAffected = psmt.executeUpdate();
+					psmt.setInt(1, updateExp);
+					psmt.setString(2, character.getNick());
+					// Update 쿼리 실행
+					int rowsAffected = psmt.executeUpdate();
+
 				}
 			}
 		} catch (SQLException e) {
