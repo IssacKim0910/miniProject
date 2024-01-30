@@ -40,18 +40,28 @@ public class Main {
 						+ "                  ###`  ``##         `###````````````````` `                         ``##`           `####` ` `  `#####``                   ##`             \r\n"
 						+ "                         `##        ` ####################                          ` `##`             ``########### `                     `##`             ");
 
-//		MusicPlayer musicPlayer = new MusicPlayer();
+		MusicPlayer musicPlayer = new MusicPlayer();
 		CharacterDTO cDTO = new CharacterDTO(null, 0, 0, 0);
 		CharacterDAO cDAO = new CharacterDAO();
 		Controller controller = new Controller();
 		Random1 r = new Random1();
 		DTO dto = null;
 		int num = 0;
+		MP3Player mp3 = new MP3Player();
+		ArrayList<Music> list = new ArrayList<Music>();
+		Music m1 = new Music("오프닝", "C:\\music_v2\\오프닝.mp3");
+		Music m2 = new Music("짱구", "C:\\music_v2\\짱구.mp3");
+		Music m3 = new Music("엔딩", "C:\\music_v2\\엔딩.mp3");
+		
+		list.add(m1);
+		list.add(m2);
+		list.add(m3);
+		
 		while (true) {
 
-//			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작
-
-//			musicPlayer.playMusic("BGM1"); // 필요한 브금을 삽입, 시작(음악이 없는 상태에서 Ctrl + f11하면 오류남)
+			
+			mp3.play(list.get(0).getPath());
+			
 			System.out.print("[1]회원가입  [2]로그인  [3]랭킹  [4]게임종료 >> ");
 			int menu = sc.nextInt();
 			if (menu == 1) { // 회원가입
@@ -64,9 +74,13 @@ public class Main {
 				String nick = sc.next();
 				dto = new DTO(id, pw, nick);
 				int cnt = controller.join(dto);
-//				musicPlayer.stopMusic("BGM1"); // 다 입력하면 브금 종료 -> 필요한 곳에 필요한 브금만 출력되도록 하기 위한 조치
+				
 
 			} else if (menu == 2) { // 로그인
+				if(mp3.isPlaying()) {
+					mp3.stop();
+				}
+				mp3.play(list.get(1).getPath());
 				System.out.print("아이디 입력 : ");
 				String id = sc.next();
 				System.out.print("비밀번호 입력 : ");
@@ -87,9 +101,8 @@ public class Main {
 						}
 
 					}
-					
 
-					int life = r.random4(10)+11;
+					int life = r.random4(10) + 11;
 					CharacterDTO cInfo = cDAO.login(id, pw);
 					cDTO = cInfo;
 					String ya = "\n하루최대 배달 가능횟수 : " + cInfo.getLife() + "회 "
@@ -103,13 +116,16 @@ public class Main {
 						}
 					}
 					System.out.println();
-					
-					
+
+			
 					while (cInfo.getHp() > 0 && cInfo.getLife() > 0) { // 게임진행
-						cDAO.LevelUp(cDTO);
-						System.out.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
-						num = sc.nextInt();
 						
+						cDAO.LevelUp(cDTO);
+						
+						System.out
+								.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
+						num = sc.nextInt();
+
 						if (num == 1) { // 떡잎마을
 
 							cDAO.delivery1(cDTO);
@@ -134,7 +150,7 @@ public class Main {
 						} else if (num == 3) { // 캐릭터정보
 							cInfo = cDAO.login(id, pw);
 							cDTO = cInfo;
-							
+
 							cInfo = cDAO.login(id, pw);
 							System.out.println("레벨 : " + cInfo.getLevel());
 							System.out.println("남은 체력 : " + cInfo.getHp());
@@ -146,7 +162,7 @@ public class Main {
 
 							cDTO = cInfo;
 							cDAO.eat(cDTO);// 체력 3회복
-							
+
 							String a = "초코비를 먹어 체력과 배달횟수가 회복됩니다.";
 							for (int i = 0; i < a.length(); i++) {
 								System.out.print(a.charAt(i));
@@ -185,13 +201,18 @@ public class Main {
 									e.printStackTrace();
 								}
 							}
+							if(mp3.isPlaying()) {
+								mp3.stop();
+							}
 							System.out.println();
 							break;
 
 						} else {
 							System.out.println("잘못 입력하셨습니다.");
 						}
-							}
+
+					}
+
 					if (cInfo.getLife() <= 0) {
 						String end = "남은 배달 횟수를 모두 소진하여 종료합니다.";
 						for (int i = 0; i < end.length(); i++) {
@@ -203,11 +224,9 @@ public class Main {
 							}
 						}
 						System.out.println();
-						
-					}else if(cInfo.getHp() <= 0) {
-						System.out.println(""
-								+"\r\n"
-								+ "\r\n"
+
+					} else if (cInfo.getHp() <= 0) {
+						System.out.println("" + "\r\n" + "\r\n"
 								+ "     . .. .     .. .  .  .  .  .  .  .  . ~$@@$=#@#!, ..       .. .     .  .  .  .  .  .  \r\n"
 								+ "        .          .        .  .  .  ,,*!,......-*#@@@#$,.     .           .           .  \r\n"
 								+ "                                   -.*-............!@$*##=:,                              \r\n"
@@ -267,7 +286,7 @@ public class Main {
 								+ "     . .. .     .. . .!@@@@@,~#@@@@@@#-*@@@~,,$.  .,!#-,,,!@:,@@@=.     .  .  .  .  .  .  \r\n"
 								+ ".  .     .  .  .  .    *@#,.  ,*@@,.. .,*=, .  .  .  .  .  .  .##-  . ..        . .       \r\n"
 								+ "");
-						
+
 						String end = "과로사로 인해 사망...";
 						for (int i = 0; i < end.length(); i++) {
 							System.out.print(end.charAt(i));
@@ -278,11 +297,12 @@ public class Main {
 							}
 						}
 						System.out.println();
+//						break;
 					}
 
 				}
 			} else if (menu == 3) { // 랭킹
-				ArrayList<CharacterDTO> rank1  = cDAO.rank();
+				ArrayList<CharacterDTO> rank1 = cDAO.rank();
 				for (int i = 0; i < rank1.size(); i++) {
 					System.out.println((i + 1) + "위 : " + rank1.get(i).getNick() + " 레벨 : " + rank1.get(i).getLevel());
 					try {
@@ -346,7 +366,9 @@ public class Main {
 								+ "                     -.                   ..         ~~,~:            \r\n"
 								+ "                     ~                                :.              \r\n"
 								+ "                     :                                :               \r\n" + "");
-
+				
+				mp3.play(list.get(2).getPath());
+				
 				String ending = "다음에 또 봐요~~          ";
 				for (int i = 0; i < ending.length(); i++) {
 					System.out.print(ending.charAt(i));
@@ -359,6 +381,7 @@ public class Main {
 				}
 				
 				break;
+
 			} else {
 				System.out.println("잘못 입력 하셨습니다.");
 			}
