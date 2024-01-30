@@ -158,7 +158,7 @@ public class Main {
 						} else if (num == 5) { // 잠자기
 							cDAO.sleep(cDTO);
 							cInfo = cDAO.login(id, pw);
-							String a = "자는중....              ";
+							String a = "자는중....                                                                                           ";
 							for (int i = 0; i < a.length(); i++) {
 								System.out.print(a.charAt(i));
 								try {
@@ -263,8 +263,9 @@ public class Main {
 								+ "     . .. .     .. . .!@@@@@,~#@@@@@@#-*@@@~,,$.  .,!#-,,,!@:,@@@=.     .  .  .  .  .  .  \r\n"
 								+ ".  .     .  .  .  .    *@#,.  ,*@@,.. .,*=, .  .  .  .  .  .  .##-  . ..        . .       \r\n"
 								+ "");
+						break;
 					}
-					break;
+					
 
 				}
 			} else if (menu == 3) { // 랭킹
