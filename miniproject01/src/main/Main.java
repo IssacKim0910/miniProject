@@ -124,9 +124,9 @@ public class Main {
 
 							cDAO.delivery2(cDTO);
 							cInfo = cDAO.login(id, pw);
-							System.out.println("떡잎 유치원 배달시작");
 							System.out.println(cDAO.random2(cDTO));
 							cInfo = cDAO.login(id, pw);
+							System.out.println("떡잎 유치원 배달시작");
 							System.out.println("남은 체력 : " + cInfo.getHp());
 							System.out.println("남은 배달횟수 : " + cInfo.getLife());
 							System.out.println("현재 경험치 : " + cInfo.getExp());
