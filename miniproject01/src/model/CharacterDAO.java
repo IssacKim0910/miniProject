@@ -565,48 +565,45 @@ public class CharacterDAO {
 			connection();
 			psmt = conn.prepareStatement(selectSql);
 			psmt.setString(1, character.getNick());
+			rs = psmt.executeQuery();
 			if (a >= 1 && a <= 9) {
 				rs = psmt.executeQuery();
-				if (a >= 1 && a <= 9) {
-					rs = psmt.executeQuery();
-					if (rs.next()) {
+				if (rs.next()) {
 
-						int exp = rs.getInt("EXP");
+					int exp = rs.getInt("EXP");
 
-						int updateExp = exp + 4;
-						psmt = conn.prepareStatement(updateSql);
+					int updateExp = exp + 4;
+					psmt = conn.prepareStatement(updateSql);
 
-						psmt.setInt(1, updateExp);
-						psmt.setString(2, character.getNick());
-						// Update 쿼리 실행
-						int rowsAffected = psmt.executeUpdate();
+					psmt.setInt(1, updateExp);
+					psmt.setString(2, character.getNick());
+					// Update 쿼리 실행
+					int rowsAffected = psmt.executeUpdate();
 
-					}
-				} else if (a >= 11 && a <= 50) {
+				}
+			} else if (a >= 11 && a <= 50) {
+				if (rs.next()) {
+					int exp = rs.getInt("EXP");
 
-					if (rs.next()) {
-						int exp = rs.getInt("EXP");
+					int updateExp = exp + 2;
+					psmt = conn.prepareStatement(updateSql);
 
-						int updateExp = exp + 2;
-						psmt = conn.prepareStatement(updateSql);
+					psmt.setInt(1, updateExp);
+					psmt.setString(2, character.getNick());
+					// Update 쿼리 실행
+					int rowsAffected = psmt.executeUpdate();
+				}
+			} else {
+				if (rs.next()) {
+					int exp = rs.getInt("EXP");
 
-						psmt.setInt(1, updateExp);
-						psmt.setString(2, character.getNick());
-						// Update 쿼리 실행
-						int rowsAffected = psmt.executeUpdate();
-					}
-				} else {
-					if (rs.next()) {
-						int exp = rs.getInt("EXP");
+					int updateExp = exp;
+					psmt = conn.prepareStatement(updateSql);
 
-						int updateExp = exp;
-						psmt = conn.prepareStatement(updateSql);
-
-						psmt.setInt(1, updateExp);
-						psmt.setString(2, character.getNick());
-						// Update 쿼리 실행
-						int rowsAffected = psmt.executeUpdate();
-					}
+					psmt.setInt(1, updateExp);
+					psmt.setString(2, character.getNick());
+					// Update 쿼리 실행
+					int rowsAffected = psmt.executeUpdate();
 				}
 			}
 		} catch (SQLException e) {
