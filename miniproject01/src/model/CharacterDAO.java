@@ -484,19 +484,19 @@ public class CharacterDAO {
 		// 떡잎 유치원
 
 		if (a >= 1 && a <= 20) {
-			na = "유리";
+			na = "유리 \n경험치 +1";
 		} else if (a >= 21 && a <= 40) {
-			na = "훈발놈";
+			na = "훈발놈 \n경험치 +1";
 		} else if (a >= 41 && a <= 60) {
-			na = "철수";
+			na = "철수 \n경험치 +1";
 		} else if (a >= 61 && a <= 80) {
-			na = "맹구";
+			na = "맹구 \n경험치 +1";
 		} else if (a >= 81 && a <= 84) {
-			na = "원장님";
+			na = "원장님 \n경험치 + 2";
 		}
 
 		if (a == 85) {
-			na = "원장님, 초코비 획득!!";
+			na = "원장님, 초코비 획득!! \n경험치 +2";
 			String selectSql2 = "SELECT * FROM JJANG WHERE NICK = ?";
 			String updateSql2 = "UPDATE JJANG SET CB = ?, EXP = ? WHERE NICK = ?";
 
@@ -525,7 +525,7 @@ public class CharacterDAO {
 				close();
 			}
 		} else if (a >= 86 && a <= 100) {
-			na = "치타";
+			na = "치타 \n경험치 미획득";
 		}
 
 		return na;
@@ -616,9 +616,9 @@ public class CharacterDAO {
 		}
 
 		if (a >= 1 && a <= 9) {
-			na = "이슬이누나";
+			na = "이슬이누나 \n경험치 + 4";
 		} else if (a == 10) {
-			na = "이슬이누나, 초코비획득!!";
+			na = "이슬이누나, 초코비획득!!\n경험치 + 4";
 			String selectSql1 = "SELECT * FROM JJANG WHERE NICK = ?";
 			String updateSql1 = "UPDATE JJANG SET CB = ? WHERE NICK = ?";
 
@@ -648,15 +648,15 @@ public class CharacterDAO {
 				close();
 			}
 		} else if (a >= 11 && a <= 30) {
-			na = "미소이모";
+			na = "미소이모 \n경험치 +2";
 		} else if (a >= 31 && a <= 50) {
-			na = "옆집아줌마";
+			na = "옆집아줌마 \n경험치 +2";
 		} else if (a >= 51 && a <= 70) {
-			na = "닭살커플";
+			na = "닭살커플 \n닭살돋아서 경험치 미획득";
 		} else if (a >= 71 && a <= 85) {
-			na = "광자누나";
+			na = "광자누나 \n🤢";
 		} else if (a >= 86 && a <= 100) {
-			na = "오수형";
+			na = "오수형 \n???";
 		}
 
 		return na;

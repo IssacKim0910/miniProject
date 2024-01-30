@@ -102,12 +102,7 @@ public class DAO {
 			String db_id = "campus_23K_AI18_p1_6";
 			String db_pw = "smhrd6";
 			conn = DriverManager.getConnection(db_url, db_id, db_pw);
-
-			if (conn != null) {
-				System.out.println("Connection 연결 성공");
-			} else {
-				System.out.println("Connection 연결 실패");
-			}
+			
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {

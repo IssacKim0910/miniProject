@@ -264,12 +264,14 @@ public class Main {
 								+ ".  .     .  .  .  .    *@#,.  ,*@@,.. .,*=, .  .  .  .  .  .  .##-  . ..        . .       \r\n"
 								+ "");
 					}
+					break;
 
 				}
 			} else if (menu == 3) { // 랭킹
 				ArrayList<CharacterDTO> rank1  = cDAO.rank();
+				System.out.println("     닉네임");
 				for (int i = 0; i < rank1.size(); i++) {
-					System.out.println((i + 1) + "위 : " + rank1.get(i).getNick() + " 레벨 : " + rank1.get(i).getLevel());
+					System.out.println((i + 1) + "위 : " + rank1.get(i).getNick() + "\t레벨 : " + rank1.get(i).getLevel());
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
