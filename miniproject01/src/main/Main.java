@@ -107,7 +107,7 @@ public class Main {
 						cDAO.LevelUp(cDTO);
 						System.out.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
 						num = sc.nextInt();
-
+						
 						if (num == 1) { // 떡잎마을
 
 							cDAO.delivery1(cDTO);
@@ -131,12 +131,14 @@ public class Main {
 
 						} else if (num == 3) { // 캐릭터정보
 							cInfo = cDAO.login(id, pw);
+							cDTO = cInfo;
+							
+							cInfo = cDAO.login(id, pw);
 							System.out.println("레벨 : " + cInfo.getLevel());
 							System.out.println("남은 체력 : " + cInfo.getHp());
 							System.out.println("초코비 : " + cInfo.getCb() + "개");
 							System.out.println("남은 배달횟수 : " + cInfo.getLife() + "회");
 							System.out.println("현재 경험치 : " + cInfo.getExp());
-							// 임시로 작성한건데 DB랑 연결하는법을 찾는중..
 
 						} else if (num == 4) { // 초코비 먹기
 
@@ -264,14 +266,12 @@ public class Main {
 								+ ".  .     .  .  .  .    *@#,.  ,*@@,.. .,*=, .  .  .  .  .  .  .##-  . ..        . .       \r\n"
 								+ "");
 					}
-					break;
 
 				}
 			} else if (menu == 3) { // 랭킹
 				ArrayList<CharacterDTO> rank1  = cDAO.rank();
-				System.out.println("     닉네임");
 				for (int i = 0; i < rank1.size(); i++) {
-					System.out.println((i + 1) + "위 : " + rank1.get(i).getNick() + "\t레벨 : " + rank1.get(i).getLevel());
+					System.out.println((i + 1) + "위 : " + rank1.get(i).getNick() + " 레벨 : " + rank1.get(i).getLevel());
 					try {
 						Thread.sleep(100);
 					} catch (InterruptedException e) {
