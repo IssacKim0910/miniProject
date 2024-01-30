@@ -59,7 +59,9 @@ public class Main {
 		
 		while (true) {
 
-			
+			if(mp3.isPlaying()) {
+				mp3.stop();
+			}
 			mp3.play(list.get(0).getPath());
 			
 			System.out.print("[1]회원가입  [2]로그인  [3]랭킹  [4]게임종료 >> ");
@@ -98,6 +100,9 @@ public class Main {
 							Thread.sleep(50);
 						} catch (InterruptedException e) {
 							e.printStackTrace();
+						}
+						if(mp3.isPlaying()) {
+							mp3.stop();
 						}
 
 					}
