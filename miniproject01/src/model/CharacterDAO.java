@@ -122,62 +122,51 @@ public class CharacterDAO {
 	// 레벨업
 	public void LevelUp(CharacterDTO character) {
 		String selectSql = "SELECT * FROM JJANG WHERE NICK = ?";
-		String sql = "UPDATE JJANG SET LV = ? WHERE NICK = ? AND EXP = ?";
+		String sql = "UPDATE JJANG SET LV = ? WHERE NICK = ? AND EXP >= ?";
 
 		try {
 			connection();
 			psmt = conn.prepareStatement(selectSql);
 			psmt.setString(1, character.getNick());
-
-			int Lv = rs.getInt("LV");
-			int Exp = rs.getInt("EXP");
+				
+			int Exp = 0;
+			int Lv = 0;
 			rs = psmt.executeQuery();
-			if (Exp >= 20) {
-				if (rs.next()) {
-					Lv = rs.getInt("LV");
-					Exp = rs.getInt("EXP");
-					psmt = conn.prepareStatement(sql);
-					psmt.setInt(1, Lv + 1);
-					psmt.setString(2, character.getNick());
-					psmt.setInt(3, Exp);
+			if(rs.next()) {
+				Lv = rs.getInt("LV");
+				Exp = rs.getInt("EXP");
+			}
 
-					// 잠잘때 미구현
-
-					int rowsAffected = psmt.executeUpdate();
-				}
-			} else if (Exp >= 40) {
-				if (rs.next()) {
-					Lv = rs.getInt("LV");
-					Exp = rs.getInt("EXP");
-					psmt = conn.prepareStatement(sql);
-					psmt.setInt(1, Lv + 1);
-					psmt.setString(2, character.getNick());
-					psmt.setInt(3, Exp);
-
-					int rowsAffected = psmt.executeUpdate();
-				}
+			if (Exp >= 140) {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, 5);
+				psmt.setString(2, character.getNick());
+				psmt.setInt(3, 140);
+				int rowsAffected = psmt.executeUpdate();
 			} else if (Exp >= 80) {
-				if (rs.next()) {
-					Lv = rs.getInt("LV");
-					Exp = rs.getInt("EXP");
-					psmt = conn.prepareStatement(sql);
-					psmt.setInt(1, Lv + 1);
-					psmt.setString(2, character.getNick());
-					psmt.setInt(3, Exp);
-
-					int rowsAffected = psmt.executeUpdate();
-				}
-			} else if (Exp >= 140) {
-				if (rs.next()) {
-					Lv = rs.getInt("LV");
-					Exp = rs.getInt("EXP");
-					psmt = conn.prepareStatement(sql);
-					psmt.setInt(1, Lv + 1);
-					psmt.setString(2, character.getNick());
-					psmt.setInt(3, Exp);
-
-					int rowsAffected = psmt.executeUpdate();
-				}
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, 4);
+				psmt.setString(2, character.getNick());
+				psmt.setInt(3, 80);
+				int rowsAffected = psmt.executeUpdate();
+			} else if (Exp >= 40) {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, 3);
+				psmt.setString(2, character.getNick());
+				psmt.setInt(3, 40);
+				int rowsAffected = psmt.executeUpdate();
+			} else if (Exp >= 20) {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, 2);
+				psmt.setString(2, character.getNick());
+				psmt.setInt(3, 20);
+				int rowsAffected = psmt.executeUpdate();
+			} else if (Exp <= 19) {
+				psmt = conn.prepareStatement(sql);
+				psmt.setInt(1, 1);
+				psmt.setString(2, character.getNick());
+				psmt.setInt(3, 20);
+				int rowsAffected = psmt.executeUpdate();
 			}
 
 		} catch (SQLException e) {

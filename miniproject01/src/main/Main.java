@@ -104,8 +104,8 @@ public class Main {
 					System.out.println();
 
 					while (cInfo.getHp() > 0 && cInfo.getLife() > 0) { // 게임진행
-						System.out
-								.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
+						cDAO.LevelUp(cDTO);
+						System.out.print("경로선택 >> [1]떡잎마을(Hard) [2]떡잎 유치원(Easy) [3]캐릭터정보 [4]초코비먹기 [5]잠자기 [6]로비로 돌아가기>> ");
 						num = sc.nextInt();
 
 						if (num == 1) { // 떡잎마을
